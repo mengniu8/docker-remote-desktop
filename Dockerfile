@@ -60,6 +60,7 @@ RUN echo 'LANGUAGE="zh_CN:zh:en_US:en"' >> /etc/environment
 RUN echo 'LANG="zh_CN.UTF-8"' >> /etc/default/locale
 RUN echo 'LANGUAGE="zh_CN:zh:en_US:en"' >> /etc/default/locale
 
+
 RUN sed -i -E 's/^; autospawn =.*/autospawn = yes/' /etc/pulse/client.conf \
     && [ -f /etc/pulse/client.conf.d/00-disable-autospawn.conf ] && sed -i -E 's/^(autospawn=.*)/# \1/' /etc/pulse/client.conf.d/00-disable-autospawn.conf || :
 
