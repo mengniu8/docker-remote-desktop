@@ -43,8 +43,22 @@ RUN apt-get update \
         xfce4-pulseaudio-plugin \
         xorgxrdp \
         xrdp \
+        vim \
+        sudo \
+        language-pack-zh-han* \
         xubuntu-icon-theme \
+        wget \
     && rm -rf /var/lib/apt/lists/*
+
+RUN echo "mn ALL=（ALL） ALL" >> /etc/sudoers
+
+RUN apt-get -y update
+RUN apt-get -y install locales xfonts-intl-chinese fonts-wqy-microhei  
+
+RUN echo 'LANG="zh_CN.UTF-8"' >> /etc/environment
+RUN echo 'LANGUAGE="zh_CN:zh:en_US:en"' >> /etc/environment
+RUN echo 'LANG="zh_CN.UTF-8"' >> /etc/default/locale
+RUN echo 'LANGUAGE="zh_CN:zh:en_US:en"' >> /etc/default/locale
 
 RUN sed -i -E 's/^; autospawn =.*/autospawn = yes/' /etc/pulse/client.conf \
     && [ -f /etc/pulse/client.conf.d/00-disable-autospawn.conf ] && sed -i -E 's/^(autospawn=.*)/# \1/' /etc/pulse/client.conf.d/00-disable-autospawn.conf || :
